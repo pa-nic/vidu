@@ -1,0 +1,5 @@
+name: netlify-plugin-handle-mysalt
+inputs:
+  - name: filename
+    description: Filename of salt js file
+    default: "salt"

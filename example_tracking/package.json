@@ -1,0 +1,15 @@
+{
+	"author": {
+		"name": "Patrick Probst",
+		"url": "https://8028.de"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/pa-nic/vidu"
+	},
+	"dependencies": {
+		"bowser": "^2.11.0",
+		"faunadb": "^4.0.0",
+		"fs": "0.0.1-security"
+	}
+}
