@@ -42,7 +42,7 @@
     try {
       // Enable loading spinners
       fetchingHitsByUrls.set(true);
-      const response = await fetch(`/api/getHitsByUrlhByYear?year=${thisYear}`);
+      const response = await fetch(`/api/getHitsByUrlByYear?year=${thisYear}`);
       let data = await response.json();
       data = data.data.sort((a, b) => parseInt(b.hits) - parseInt(a.hits));
       // Save response in store
