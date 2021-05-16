@@ -28,7 +28,7 @@ This project was started for trying/learning the following tools and still end u
 
 This project was created for fun and educational purposes.
 
-If you're having a web page with i.e. more than 1000 visits a day *Vidu* might not be right for you, as it is currently not designed for highly frequented web pages and you will most likely exceed the free plans of Netlify and Fauna.
+*Vidu*, in general, has no limitation on processing page hits. But keep in mind that by using it for highly frequented web pages you will most likely exceed the free plans of Netlify and Fauna.
 
 Fork it. Extend it. It's "[unlicensed](./LICENSE)".
 
