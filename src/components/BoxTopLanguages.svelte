@@ -44,7 +44,7 @@
       fetchingHitsByLanguage.set(true);
       const response = await fetch(`/api/getHitsByLanguageByYear?year=${thisYear}`);
       let data = await response.json();
-      data = data.data.sort((a, b) => parseInt(b.hits) - parseInt(a.hits));
+      data = data.data.sort((a, b) => parseInt(b.hits) - parseInt(a.hits)).filter(obj => obj.hits > 0);;
       // Save response in store
       hitsByLanguageCurrYear.set(data)
       // Disable loading spinners

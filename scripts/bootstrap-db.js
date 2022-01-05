@@ -69,7 +69,7 @@ function setupFaunaDB() {
                 field: ["data", "url"]
               },
               {
-                field: ["data", "date"]
+                field: ["data", "time"]
               },
               {
                 field: ["ref"]
@@ -89,7 +89,7 @@ function setupFaunaDB() {
                 field: ["data", "language"]
               },
               {
-                field: ["data", "date"]
+                field: ["data", "time"]
               },
               {
                 field: ["ref"]
@@ -109,7 +109,7 @@ function setupFaunaDB() {
                 field: ["data", "browser_name"]
               },
               {
-                field: ["data", "date"]
+                field: ["data", "time"]
               },
               {
                 field: ["ref"]
@@ -279,7 +279,7 @@ function setupFaunaDB() {
                 binding: "os_version"
               },
               {
-                field: ["data", "date"]
+                field: ["data", "time"]
               },
               {
                 field: ["ref"]

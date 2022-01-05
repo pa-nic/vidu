@@ -15,8 +15,8 @@ exports.handler = async (event, context) => {
         {hits: q.Count(
           q.Range(
             q.Match(q.Index("entries_by_url"), q.Var("url")),
-            ["","",q.Date(event.queryStringParameters.year + "-01-01")],
-            q.Date(event.queryStringParameters.year + "-12-31")
+            [q.Var("url"), q.Time(q.Concat([event.queryStringParameters.year, "-01-01T00:00:00Z"]))],
+            [q.Var("url"), q.Time(q.Concat([event.queryStringParameters.year, "-12-31T00:00:00Z"]))]
           )
         )}
       )
