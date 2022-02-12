@@ -2,10 +2,10 @@
   "name": "Vidu",
   "version": "0.4.2",
   "author": {
-		"name": "Patrick Probst",
-		"url": "https://8028.de"
-	},
-	"description": "Minimal (netlify) web analytics",
+    "name": "Patrick Probst",
+    "url": "https://8028.de"
+  },
+  "description": "Minimal (netlify) web analytics",
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
