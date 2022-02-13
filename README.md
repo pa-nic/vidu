@@ -1,6 +1,6 @@
 <p align="center"><img src="./public/images/logo.png" width="100"></p>
 
-<p align="center">Vidu - Minimal (netlify) web analytics</p>
+<p align="center">Vidu - Minimal (jamstack) web analytics</p>
 
 <p align="center"><img src="https://user-images.githubusercontent.com/52470102/114470919-fd0e6480-9bef-11eb-82c2-177ec3c0e8f9.png"></p>
 
