@@ -39,7 +39,7 @@ export function getNamesOfLastXDays(today, days) {
 }
 
 function getNameOfMonth(monthOfYear) {
-  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "Septembre", "October", "November", "December"];
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   return months[monthOfYear];
 }
 
