@@ -15,11 +15,11 @@ exports.handler = async (event) => {
   // User agend header parsing
   const useragent = headers['user-agent'];
   // Client IP
-  let clientIP = headers['client-ip'];
+  let clientIP = headers['x-nf-client-connection-ip'];
 
   /* BEGIN # Track only if NOT bot/crawler, localhost and netlify deploy server */
 
-  if ( !(/bot|crawler|spider|crawling/i).test(useragent) && clientIP !== '127.0.0.1' && clientIP !== '::1' && !hostname.startsWith('main--')) {
+  if ( !(/bot|crawler|HeadlessChrome|spider|crawling/i).test(useragent) && clientIP !== '127.0.0.1' && clientIP !== '::1') {
 
     const browser = bowser.getParser(useragent);
     // Create browser details object
