@@ -5,8 +5,8 @@
   import { hitsByLanguageOverall, hitsByLanguageCurrYear, fetchingHitsByLanguage } from "../stores/dataStore.js";
 
   const thisYear = new Date().getFullYear().toString();
-  let viewhitsByLanguageOverall= true;
-  let viewHitsByLanguageThisYear = false;
+  let viewhitsByLanguageOverall= false;
+  let viewHitsByLanguageThisYear = true;
 
   // Limit languages overall array to 10 objects
   let languagesOverall = [];
@@ -19,7 +19,7 @@
   /**
    * Get sum of hits for each language
    */
-   const gethitsByLanguageOverall = async () => {
+   const getHitsByLanguagesOverall = async () => {
     try {
       // Enable loading spinners
       fetchingHitsByLanguage.set(true);
@@ -83,7 +83,7 @@
   }
 
   onMount(async () => {
-    gethitsByLanguageOverall();
+    getHitsByLanguageByYear();
   })
 </script>
 
@@ -92,18 +92,18 @@
     <h2 class="p-2">Top 10 languages</h2>
     <div class="flex flex-wrap">
       <button 
+        on:click="{handleViewOverall}"
+        class="{viewhitsByLanguageOverall ?  
+          "px-4 py-2 rounded-t-lg bg-gray-700 text-white" : 
+          "px-4 py-2 rounded-t-lg bg-gray-100 text-green-500 hover:text-gray-700 hover:cursor-pointer hover:bg-gray-200"}">
+        All
+      </button>
+      <button
         on:click="{handleViewThisYear}"
-        class="{viewHitsByLanguageThisYear ? 
+        class="{viewHitsByLanguageThisYear ?
           "px-4 py-2 rounded-t-lg bg-gray-700 text-white" : 
           "px-4 py-2 rounded-t-lg bg-gray-100 text-green-500 hover:text-gray-700 hover:cursor-pointer hover:bg-gray-200"}">
         {thisYear}
-      </button>
-      <button
-        on:click="{handleViewOverall}"
-        class="{viewhitsByLanguageOverall ? 
-        "px-4 py-2 rounded-t-lg bg-gray-700 text-white" : 
-        "px-4 py-2 rounded-t-lg bg-gray-100 text-green-500 hover:text-gray-700 hover:cursor-pointer hover:bg-gray-200"}">
-        All
       </button>
     </div>      
   </div>

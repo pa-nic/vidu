@@ -5,8 +5,8 @@
   import { hitsByUrlOverall, hitsByUrlCurrYear, fetchingHitsByUrls } from "../stores/dataStore.js";
 
   const thisYear = new Date().getFullYear().toString();
-  let viewPageHitsOverall = true;
-  let viewPageHitsThisYear = false;
+  let viewPageHitsOverall = false;
+  let viewPageHitsThisYear = true;
 
   // Limit pages overall array to 10 objects
   let pagesOverall = [];
@@ -83,7 +83,7 @@
   }
 
   onMount(async () => {
-    gethitsByUrlOverall();
+    getHitsByUrlsByYear();
   })
 </script>
 
@@ -92,18 +92,18 @@
     <h2 class="p-2">Top 10 pages</h2>
     <div class="flex flex-wrap">
       <button 
+        on:click="{handleViewOverall}"
+        class="{viewPageHitsOverall ? 
+          "px-4 py-2 rounded-t-lg bg-gray-700 text-white" : 
+          "px-4 py-2 rounded-t-lg bg-gray-100 text-green-500 hover:text-gray-700 hover:cursor-pointer hover:bg-gray-200"}">
+        All
+      </button>
+      <button
         on:click="{handleViewThisYear}"
         class="{viewPageHitsThisYear ? 
           "px-4 py-2 rounded-t-lg bg-gray-700 text-white" : 
           "px-4 py-2 rounded-t-lg bg-gray-100 text-green-500 hover:text-gray-700 hover:cursor-pointer hover:bg-gray-200"}">
         {thisYear}
-      </button>
-      <button
-        on:click="{handleViewOverall}"
-        class="{viewPageHitsOverall ? 
-        "px-4 py-2 rounded-t-lg bg-gray-700 text-white" : 
-        "px-4 py-2 rounded-t-lg bg-gray-100 text-green-500 hover:text-gray-700 hover:cursor-pointer hover:bg-gray-200"}">
-        All
       </button>
     </div>      
   </div>

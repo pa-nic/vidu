@@ -12,8 +12,8 @@ export function detectTokens() {
     confirmInviteToken(params.get("invite_token"));
     return;
   } else if (params.has("recovery_token")) {
-    // console.log("found recovery token", params.has("recovery_token"));
-    confirmRecoveryToken(params.has("recovery_token"));
+    // console.log("found recovery token", params.get("recovery_token"));
+    confirmRecoveryToken(params.get("recovery_token"));
     return;
   }
 }

@@ -5,8 +5,8 @@
   import { hitsByBrowserOverall, hitsByBrowserCurrYear, fetchingHitsByBrowser } from "../stores/dataStore.js";
 
   const thisYear = new Date().getFullYear().toString();
-  let viewHitsByBrowserOverall= true;
-  let viewHitsByBrowserThisYear = false;
+  let viewHitsByBrowserOverall= false;
+  let viewHitsByBrowserThisYear = true;
 
   // Limit browsers overall array to 10 objects
   let browsersOverall = [];
@@ -19,7 +19,7 @@
   /**
    * Get sum of hits for each browser
    */
-   const gethitsByBrowserOverall = async () => {
+   const getHitsByBrowsersOverall = async () => {
     try {
       // Enable loading spinners
       fetchingHitsByBrowser.set(true);
@@ -64,7 +64,7 @@
     viewHitsByBrowserThisYear = false;
     // Only fetch if store is empty
     if (!$hitsByBrowserOverall) {
-      getHitsByBrowserssOverall();
+      getHitsByBrowsersOverall();
     }
   }
 
@@ -83,7 +83,7 @@
   }
 
   onMount(async () => {
-    gethitsByBrowserOverall();
+    getHitsByBrowsersByYear();
   })
 </script>
 
@@ -92,18 +92,18 @@
     <h2 class="p-2">Top 10 browsers</h2>
     <div class="flex flex-wrap">
       <button 
+        on:click="{handleViewOverall}"
+        class="{viewHitsByBrowserOverall ? 
+          "px-4 py-2 rounded-t-lg bg-gray-700 text-white" : 
+          "px-4 py-2 rounded-t-lg bg-gray-100 text-green-500 hover:text-gray-700 hover:cursor-pointer hover:bg-gray-200"}">
+        All
+      </button>
+      <button
         on:click="{handleViewThisYear}"
         class="{viewHitsByBrowserThisYear ? 
           "px-4 py-2 rounded-t-lg bg-gray-700 text-white" : 
           "px-4 py-2 rounded-t-lg bg-gray-100 text-green-500 hover:text-gray-700 hover:cursor-pointer hover:bg-gray-200"}">
         {thisYear}
-      </button>
-      <button
-        on:click="{handleViewOverall}"
-        class="{viewHitsByBrowserOverall ? 
-        "px-4 py-2 rounded-t-lg bg-gray-700 text-white" : 
-        "px-4 py-2 rounded-t-lg bg-gray-100 text-green-500 hover:text-gray-700 hover:cursor-pointer hover:bg-gray-200"}">
-        All
       </button>
     </div>      
   </div>
