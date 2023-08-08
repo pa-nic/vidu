@@ -39,5 +39,5 @@
     "prebuild" : "echo 'Check FaunaDB schemas' && npm run bootstrap-db",
     "start" : "sirv public -s"
   },
-  "version" : "0.4.3"
+  "version" : "0.4.6"
 }
