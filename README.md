@@ -1,4 +1,4 @@
-<p align="center"><img src="./public/images/logo.png" width="100"></p>
+<p align="center"><img src="./src/lib/images/logo.png" width="100"></p>
 
 <p align="center">Vidu - Minimal (jamstack) web analytics</p>
 
@@ -8,21 +8,21 @@
 
 This project was started for trying/learning the following tools and still end up with something useful (at least to me):
 
-- [Svelte](https://svelte.dev) javascript-framework (Vidu SPA backend)
+- [Svelte](https://svelte.dev) javascript-framework (SvelteKit)
 - [Netlify](https://netlify.com) static hosting
 - [Netlify Identity](https://docs.netlify.com/visitor-access/identity/) for user authentication with [GoTrueJS](https://github.com/netlify/gotrue)
 - [Netlify Functions](https://docs.netlify.com/functions/overview/) AWS lambda functions for API calls
 - [Fauna](https://fauna.com) as transactional database
 - [GitHub Actions](https://docs.github.com/en/actions) to execute build hook of monitored web page to refresh encryption salt every day at midnight
 - [Netlify Build Plugins](https://docs.netlify.com/configure-builds/build-plugins/) to retain encryption *salt* on normal builds and refresh it if build web hook is executed by GitHub action
-- [Windi CSS](https://windicss.org) Next generation Tailwind CSS compiler
+- [Tailwind CSS](https://tailwindcss.com) Next generation Tailwind CSS compiler
 
 ### Functionality
 
 *Vidu* [see - /Esperanto/] consists of
 
 - A [Netlify Function](https://docs.netlify.com/functions/overview/) that is included as "tracker" in your web pages to collect (anonymized) user data and sending these to a [Fauna](https://fauna.com) database.
-- A [Svelte](https://svelte.dev) SPA which displays all the data in a simple yet beautiful dashboard.
+- A [SvelteKit](https://svelte.dev) web which displays all the data in a simple yet beautiful dashboard.
 
 ### Disclaimer
 
@@ -47,38 +47,76 @@ I assume you already have a [Netlify](https://netlify.com) account.
 
 1. **Create database**
 
-If you don't have a Fauna account yet, sign up [here](https://dashboard.fauna.com/accounts/login). Create a new database by clicking the *New Database* button and filling in a name in the form that follows:
-
-![image32](https://user-images.githubusercontent.com/52470102/114444235-e7d50e00-9bce-11eb-9b47-4b2315037452.png)
+If you don't have a Fauna account yet, sign up [here](https://dashboard.fauna.com/accounts/login). 
+Create a new database.
 
 2. **Create a database key**
 
-The *FAUNA_SECRET* for your database can be created in the Fauna dashboard by going to the *SECURITY* menu and clicking *NEW KEY*. Make sure to select the Admin role since our key requires full access to the database.
+The *FAUNA_SECRET* for your database can be created in the Fauna dashboard by selecting your just created databse and browsing to *Keys*. 
 
-Fill in a name, press Save, and you will receive a new key. Make sure to copy it since you will only receive this key once. Since this key will have full access to your database, make sure to keep it somewhere safe.
+Select *Create Key*. Fill in a name, select role *server*, press Save, and you will receive a new key. Make sure to copy it since you will only receive this key once.
 
-![image16](https://user-images.githubusercontent.com/52470102/114444288-f8858400-9bce-11eb-807b-85eedf8495a2.png)
+3. **Create a collection**
 
-3. **Deploy repository to Netlify**
+Create a new collection under your database name with the name *hits* (you can keep the default settings).
+Select the collection and to the *Schema* section and over-write its content with the following schema. Save.
 
-With your server key ready, you can easily clone this repo and deploy this app in a few seconds by clicking the deploy button. Fill out the form and enter your *FAUNA_SECRET*. The DB structure will be setup as pre-build task. See [bootstrap-db.js](./scripts/bootstrap-db.js) for details.
+```
+collection hits {
+  history_days 0
+  ttl_days 2555
+  compute date:Date = (
+    doc => Date(doc.time.toString().slice(0, 10))
+  )
+  compute os = (
+    doc => {
+      if(doc.os_name != null) {
+        if(doc.os_versionName != null) {
+          doc.os_name + " " + doc.os_versionName
+        } else (doc.os_name)
+      } else("unknown")
+    } 
+  )
+  compute year:Number = (
+    doc => doc.time.year
+  )
+  compute month:Number = (
+    doc => doc.time.month
+  )
+  index byDate {
+    terms [.date]
+    values [ .date ]
+  }
+  index byYear {
+    terms [.year]
+    values [ .date ]
+  }
+  index byYearByMonth {
+    terms [.year, .month]
+    values [ .date ]
+  }
+}
+```
+
+4. **Deploy repository to Netlify**
+
+With your server key ready, you can easily clone this repo and deploy this app in a few seconds by clicking the deploy button. Fill out the form and enter your *FAUNA_SECRET*.
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/pa-nic/vidu)
 
-4. **Enable Identity**
+5. **Enable Identity**
 
 Enable Netlify Identity feature on your newly deployed Netlify site. Otherwise adding users and logins wont work.
 
-![visitor-access-identity-enable](https://user-images.githubusercontent.com/52470102/114446010-0936f980-9bd1-11eb-854b-ab3faf82d0c0.png)
 
-5. **Configure emails sent during user registration and other actions**
+6. **Configure emails sent during user registration and other actions**
 
 Under *Site Settings* go to *Identity* - *Emails* and configure the templates as follows:
 
 *Invitation template* **Path:** /email_templates/invitation.html<br/>
 *Recovery template* **Path:** /email_templates/recover.html
 
-6. **Set registration to invite only**
+7. **Set registration to invite only**
 
 Under *Site Settings* go to *Identity* - *Overview* set *Registration preferences* to *Invite only*. You can then go to the *Identity* tab and invite/add your first user which should receive a confirmation email.
 
@@ -86,7 +124,7 @@ Under *Site Settings* go to *Identity* - *Overview* set *Registration preference
 
 For how to implement the tracking in your web page take a look at the [example](./example_tracking). Further details below.
 
-**Do not forget** to add your *FAUNA_SECRET* to the environment variables of this Netlify web page, too!
+**Check** your *FAUNA_SECRET* is configured correctly as an environment variable for this Netlify web page!
 
 #### Tracking Code
 
