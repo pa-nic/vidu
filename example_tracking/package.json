@@ -9,7 +9,7 @@
 	},
 	"dependencies": {
 		"bowser": "^2.11.0",
-		"faunadb": "^4.0.0",
+		"fauna": "^2.3.0",
 		"fs": "0.0.1-security"
 	}
 }

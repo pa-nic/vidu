@@ -1,11 +1,10 @@
-const faunadb = require('faunadb');
+const { Client, fql } = require('fauna');
 const bowser = require('bowser');
 const crypto = require('crypto');
 const language = require("./utils/languagecodes");
 const { salt } = require('./utils/salt');
 
 exports.handler = async (event) => {
-  const q = faunadb.query;
   const { headers } = event;
   // We will use the referer to know which page we want to track.
   const referer = headers['referer'];
@@ -20,7 +19,6 @@ exports.handler = async (event) => {
   /* BEGIN # Track only if NOT bot/crawler, localhost and netlify deploy server */
 
   if ( !(/bot|crawler|HeadlessChrome|spider|crawling/i).test(useragent) && clientIP !== '127.0.0.1' && clientIP !== '::1') {
-
     const browser = bowser.getParser(useragent);
     // Create browser details object
     const clientBrowser = browser.getBrowser();
@@ -39,25 +37,23 @@ exports.handler = async (event) => {
     // Create hash with daily salt to create anon ID
     const id = crypto.createHash('sha256').update(`${ salt }${ clientIP }${ hostname }${ pathname }${ useragent }`).digest('hex');
     // Connect to our database.
-    const client = new faunadb.Client({
+    const client = new Client({
       secret: process.env.FAUNA_SECRET
     });
     
     try {
-      await client.query(
-        q.Create(q.Collection('hits'), {
-          data: { 
-            id: id, 
-            url: referer, 
-            browser_name: clientBrowser.name, 
-            browser_version: clientBrowser.version,
-            os_name: clientOS.name, 
-            os_version: clientOS.version, 
-            os_versionName: clientOS.versionName, 
-            language: clientLanguage, 
-            time: q.Now() }
-        })
-      );
+      const query = fql`hits.createData({
+        usr_hash: ${id}, 
+        url: ${referer}, 
+        browser_name: ${clientBrowser.name}, 
+        browser_version: ${clientBrowser.version},
+        os_name: ${clientOS.name}, 
+        os_version: ${clientOS.version}, 
+        os_versionName: ${clientOS.versionName}, 
+        language: ${clientLanguage}, 
+        time: Time.now()
+      })`;
+      await client.query(query);
     } catch (error) {
       console.error(error);
     }
