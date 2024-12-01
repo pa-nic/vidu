@@ -22,7 +22,7 @@ This project was started for trying/learning the following tools and still end u
 *Vidu* [see - /Esperanto/] consists of
 
 - A [Netlify Function](https://docs.netlify.com/functions/overview/) that is included as "tracker" in your web pages to collect (anonymized) user data and sending these to a [Fauna](https://fauna.com) database.
-- A [SvelteKit](https://svelte.dev) web which displays all the data in a simple yet beautiful dashboard.
+- A [SvelteKit](https://svelte.dev) web app which displays all the data in a simple yet beautiful dashboard.
 
 ### Disclaimer
 
