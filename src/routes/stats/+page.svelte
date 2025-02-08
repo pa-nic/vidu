@@ -519,7 +519,7 @@
                         {#each $hitsByBrowserOverall as {browser, hits}}
                             <ListItemBarChart
                                 description = {browser}
-                                values = {$hitsByBrowserCurrYear}
+                                values = {$hitsByBrowserOverall}
                                 value = {hits}
                             />
                         {/each}
@@ -579,7 +579,7 @@
                         {#each $hitsByOSOverall as {os, hits}}
                             <ListItemBarChart
                                 description = {os}
-                                values = {$hitsByOSCurrYear}
+                                values = {$hitsByOSOverall}
                                 value = {hits}
                             />
                         {/each}
@@ -636,7 +636,7 @@
                         {#each $hitsByLanguageOverall as {language, hits}}
                             <ListItemBarChart
                                 description = {language}
-                                values = {$hitsByLanguageCurrYear}
+                                values = {$hitsByLanguageOverall}
                                 value = {hits}
                             />
                         {/each}
