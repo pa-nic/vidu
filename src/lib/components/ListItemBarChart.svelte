@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { getMaxOfArray, formatNumber } from "$lib/helper"
+    import { getMaxOfArray, formatNumber } from "$lib/helper";
     
     export let description: any;
     export let values: any;
@@ -7,9 +7,9 @@
   
     // Calculate bar width in % based on max value (100%) for item value
     let bar = 0;
-    $: if(values) {
+    $: if(values && values.length > 0) {
         const max = getMaxOfArray(values.map((obj: { hits: number; }) => obj.hits));
-        bar = max > 0 ? Math.round(100 / max * value) : 0;
+        bar = max > 0 ? Math.min(Math.round(100 / max * value), 100) : 0;
     }
 </script>
   
