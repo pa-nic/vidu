@@ -1,3 +1,5 @@
+<p align="center" style="background-color: #FFCE54; color: #000; border: 1px solid #FCBB42; padding: 8px;">DEPRECATED</p>
+
 <p align="center"><img src="./src/lib/images/logo.png" width="100"></p>
 
 <p align="center">Vidu - Minimal (jamstack) web analytics</p>
@@ -17,6 +19,10 @@ This project was started for trying/learning the following tools and still end u
 - [Netlify Build Plugins](https://docs.netlify.com/configure-builds/build-plugins/) to retain encryption *salt* on normal builds and refresh it if build web hook is executed by GitHub action
 - [Tailwind CSS](https://tailwindcss.com) Next generation Tailwind CSS compiler
 
+### DEPRECATED
+
+<p style="background-color: #FFCE54; color: #000; border: 1px solid #FCBB42; padding: 8px;">Fauna is shutting down (May 30, 2025) and NETLIFY has declared its identity service deprecated, too. Therefor, this project is abandoned and I encourage you to switch to one of the (freely) available analytics solutions out there.</p>
+
 ### Functionality
 
 *Vidu* [see - /Esperanto/] consists of
@@ -31,13 +37,6 @@ This project was created for fun and educational purposes.
 *Vidu*, in general, has no limitation on processing page hits. But keep in mind that by using it for highly frequented web pages you will most likely exceed the free plans of Netlify and Fauna.
 
 Fork it. Extend it. It's "[unlicensed](./LICENSE)".
-
-### Recommendation
-
-If the above is the case or you've stumbled up-on this repository in search for a alternative web analytics tool, I may suggest you also take a look at these (more feature-rich) solutions:
-- [Netlify Analytics](https://www.netlify.com/products/analytics/) Netlify's own analytics tool (SaaS)
-- [Ackee](https://ackee.electerious.com) Node.js based analytics tool for those who care about privacy (self-hosted)
-- [Fathom](https://usefathom.com) privacy-first alternative to Google Analytics (SaaS)
 
 ## Setup
 
