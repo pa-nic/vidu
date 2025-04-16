@@ -1,4 +1,7 @@
-<p align="center" style="background-color: #FFCE54; color: #000; border: 1px solid #FCBB42; padding: 8px;">DEPRECATED</p>
+<p align="center">DEPRECATED</p>
+
+> [!WARNING]
+> Fauna is shutting down (May 30, 2025) and NETLIFY has declared its identity service as deprecated. Therefor, this project is abandoned and I encourage you to switch to one of the (freely) available analytics solutions out there.
 
 <p align="center"><img src="./src/lib/images/logo.png" width="100"></p>
 
@@ -18,10 +21,6 @@ This project was started for trying/learning the following tools and still end u
 - [GitHub Actions](https://docs.github.com/en/actions) to execute build hook of monitored web page to refresh encryption salt every day at midnight
 - [Netlify Build Plugins](https://docs.netlify.com/configure-builds/build-plugins/) to retain encryption *salt* on normal builds and refresh it if build web hook is executed by GitHub action
 - [Tailwind CSS](https://tailwindcss.com) Next generation Tailwind CSS compiler
-
-### DEPRECATED
-
-<p style="background-color: #FFCE54; color: #000; border: 1px solid #FCBB42; padding: 8px;">Fauna is shutting down (May 30, 2025) and NETLIFY has declared its identity service deprecated, too. Therefor, this project is abandoned and I encourage you to switch to one of the (freely) available analytics solutions out there.</p>
 
 ### Functionality
 
