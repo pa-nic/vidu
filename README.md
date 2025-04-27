@@ -2,7 +2,7 @@
 > DEPRECATTION WARNING: Fauna is shutting down (May 30, 2025) and NETLIFY has declared its identity service as deprecated. Therefor, this project is abandoned and I encourage you to switch to one of the (freely) available analytics solutions out there.
 
 > [!TIP]
-> Check out [Vidu-Mini](https://github.com/pa-nic/vidu). A minimal version of Vidu, making use of Netlify Blobs as data store.
+> Check out [Vidu-Mini](https://github.com/pa-nic/vidu-mini). A minimal version of Vidu, making use of Netlify Blobs as data store.
 
 
 <p align="center"><img src="./src/lib/images/logo.png" width="100"></p>
